@@ -1,0 +1,15 @@
+.dub
+.vs
+docs.json
+__dummy.html
+docs/
+dynd2.so
+dynd2.dylib
+dynd2.dll
+dynd2.a
+dynd2.lib
+dynd2-test-*
+*.exe
+*.o
+*.obj
+*.lst

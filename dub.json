@@ -1,0 +1,10 @@
+{
+	"name": "dil",
+	"authors": [
+		"James W. Barlow"
+	],
+	"description": "DIL Scripting Language.",
+	"copyright": "Copyright © 2018, James Barlow",
+	"license": "MIT",
+	"targetType" :"autodetect"
+}
