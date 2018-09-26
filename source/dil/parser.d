@@ -229,6 +229,10 @@ dstring moveOp(RNG)(ref StrWrapper!RNG wrapper)
 			wrapper.popFront;
 		}
 		return s;
+		case '$':
+		wrapper.popFront;
+		return "$";
+
 		default:
 		return null;
 	}

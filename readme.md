@@ -156,6 +156,11 @@ local classA = class
 local instA = classA.namedCtor(1);
 io.println(instA.v);
 
+// length operator
+local arr = [0,124,54];
+// Prints length of arr
+io.println($arr);
+
 // scope keyword returns the current scope as a table.
 local i = 0;
 io.println(scope["i"]);
