@@ -810,6 +810,14 @@ const(IExpression) parsePost(RNG)(ref StrWrapper!RNG wrapper, const(IExpression)
 			wrapper.skipWS;
 			if(wrapper.front != ',')
 			{
+				if(wrapper.front == '\\')
+				{
+					wrapper.popFront;
+					dilEnforce!DilException(wrapper.front == '/',"Incomplete var arg forward operator.");
+					wrapper.popFront;
+					wrapper.expect(")");
+					return wrapper.parsePost(new FwdVarArgCallExpr(inner,args[0..$-1],args[$-1]));
+				}
 				wrapper.expect(")");
 				break;
 			}

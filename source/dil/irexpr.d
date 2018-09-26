@@ -366,6 +366,38 @@ final class CallExpr : IExpression
 	}
 }
 
+final class FwdVarArgCallExpr : IExpression
+{
+	const IExpression inner;
+	const(IExpression)[] args;
+	const IExpression vararg;
+
+	import std.algorithm : map;
+	import std.array : array;
+
+	this()(const IExpression inner, const(IExpression)[] args, const(IExpression) vararg)
+	{
+		this.inner = inner.simplify;
+		this.args = args.map!(a => a.simplify).array;
+		this.vararg = vararg.simplify;
+	}
+
+	DilVal ctEval() const
+	{
+		throw new DilCTEvalException;
+	}
+
+	DilLVal evalAsLVal(DilTable dilScope) const
+	{
+		return DilLVal(eval(dilScope),DilVal.init);
+	}
+
+	DilVal eval(DilTable dilScope) const
+	{
+		return inner.eval(dilScope).get!IDilCallable.call(args.map!(a => a.eval(dilScope)).array ~ vararg.eval(dilScope).get!(DilVal[]));
+	}
+}
+
 final class ArrCtorExpr : IExpression
 {
 	const(IExpression)[] args;
