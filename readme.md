@@ -108,7 +108,7 @@ io.println(true ? true : false);
 io.println( 63 & 63 | 0 ^ 64 << 1 >> 1 >>> 1);
 ```
 
-### Expressions
+### Misc
 ```
 // Function expr
 // Language does not support functions as statements.
@@ -147,3 +147,38 @@ io.println(instA.v);
 local i = 0;
 io.println(scope["i"]);
 ```
+
+### Module Example
+// ./mod.dil
+local MultiplesOf2 = class {
+	local k = 0;
+	local v = 0;
+
+	this new() {}
+
+	local advance = function
+	{
+		k++;
+		v = k*2;
+	};
+
+	local isEmpty = function { return false; };
+	local key = property {
+		get = function { return k; };
+		set = function(n) { k = n; v = 2*n; };
+	};
+	local value = property {
+		get = function { return v; }; 
+	};
+};
+
+return scope;
+
+// ./main.dil
+
+local io = :import("std.io");
+local mod = :import("mod");
+
+//Should print multiples of 2 forever.
+foreach(k,v; mod.MultiplesOf2.new())
+	io.println(k,' ',v);
