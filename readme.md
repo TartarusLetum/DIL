@@ -149,6 +149,7 @@ io.println(scope["i"]);
 ```
 
 ### Module Example
+```
 // ./mod.dil
 local MultiplesOf2 = class {
 	local k = 0;
@@ -182,3 +183,4 @@ local mod = :import("mod");
 //Should print multiples of 2 forever.
 foreach(k,v; mod.MultiplesOf2.new())
 	io.println(k,' ',v);
+```
