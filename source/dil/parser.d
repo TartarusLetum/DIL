@@ -82,7 +82,14 @@ void skipWS(RNG)(ref StrWrapper!RNG wrapper)
 	{
 		if(!wrapper.front.isWhite)
 		{
-			if(wrapper.front == '/')
+			if(wrapper.front == '#')
+			{
+				wrapper.popFront;
+				for(;!wrapper.empty;wrapper.popFront)
+						if(wrapper.front == '\n' || wrapper.front == '\r')
+							break;
+			}
+			else if(wrapper.front == '/')
 			{
 				auto tmp = wrapper.save;
 				wrapper.popFront;
@@ -90,10 +97,7 @@ void skipWS(RNG)(ref StrWrapper!RNG wrapper)
 				{
 					for(;!wrapper.empty;wrapper.popFront)
 						if(wrapper.front == '\n' || wrapper.front == '\r')
-						{
-							wrapper.popFront;
 							break;
-						}
 				}
 				else if(wrapper.front == '*')
 				{
@@ -105,10 +109,7 @@ void skipWS(RNG)(ref StrWrapper!RNG wrapper)
 						{
 							wrapper.popFront;
 							if(wrapper.front == '/')
-							{
-								wrapper.popFront;
 								break;
-							}
 						}
 					}
 				}
@@ -127,10 +128,7 @@ void skipWS(RNG)(ref StrWrapper!RNG wrapper)
 							{
 								count--;
 								if(count == 0)
-								{
-									wrapper.popFront;
 									break;
-								}
 							}
 						}
 						else if(wrapper.front == '/')

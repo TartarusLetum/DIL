@@ -2,6 +2,19 @@
 A simple embeddable scripting language written in the [D programming language](https://dlang.org/).
 
 ## Examples
+### Comments
+```
+//Single line comment
+# Single line comment
+/*
+	Block comment
+*/
+/+
+	/+
+		Nested block comment
+	+/
++/
+```
 ### Var Declarations
 ```
 /*
